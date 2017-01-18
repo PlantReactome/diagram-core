@@ -15,8 +15,8 @@ public abstract class SpeciesNodeFactory {
     private static Logger logger = Logger.getLogger(SpeciesNodeFactory.class.getName());
 
 
-    public static long HUMAN_DB_ID = 48887L;
-    public static String HUMAN_STR = "Homo sapiens";
+    public static long HUMAN_DB_ID = 186860L; // JP-PR
+    public static String HUMAN_STR = "Oryza sativa"; // JP-PR
 
     private static Map<Long, SpeciesNode> speciesMap = new HashMap<Long, SpeciesNode>();
 

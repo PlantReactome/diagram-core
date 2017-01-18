@@ -58,7 +58,7 @@ public class Convertor2JsonTool {
                         , new FlaggedOption("trivial", JSAP.STRING_PARSER, "trivialchemicals.txt", JSAP.NOT_REQUIRED, 'r', "trivial",
                         "A file containing the ids and the names of the trivial molecules.")
                         , new QualifiedSwitch("target", JSAP.STRING_PARSER, "ALL", JSAP.NOT_REQUIRED, 't', "target",
-                        "Target pathways to convert. Use either comma separated IDs, 'human' for human pathways or 'all' for everything ").setList(true).setListSeparator(',')
+                        "Target pathways to convert. Use either comma separated IDs, 'REFERENCE' for reference species pathways or 'ALL' for everything ").setList(true).setListSeparator(',') // JP-PR
                         , new QualifiedSwitch("verbose", JSAP.BOOLEAN_PARSER, null, JSAP.NOT_REQUIRED, 'v', "verbose",
                         "Requests verbose output.")
                 }
@@ -133,9 +133,9 @@ public class Convertor2JsonTool {
                 }
             }
             LogUtil.log(logger, Level.TRACE, " >> Done");
-        } else if(target[0].toUpperCase().equals("HUMAN")){
-            //Convert ONLY Human  pathways
-            LogUtil.log(logger, Level.TRACE, " >> Retrieving Only HUMAN Pathway Diagrams ...");
+        } else if(target[0].toUpperCase().equals("REFERENCE")){ //JP-PR
+            //Convert ONLY reference species pathways // JP-PR
+            LogUtil.log(logger, Level.TRACE, " >> Retrieving Only Reference Species Pathway Diagrams ...");
             Collection pathways = dba.fetchInstancesByClass(ReactomeJavaConstants.Pathway);
             int examinedPathways = 0;
             int pathwaysWithDiagrams = 0;
@@ -144,7 +144,7 @@ public class Convertor2JsonTool {
                 pathway.loadDetails();
                 Species species = pathway.getSpecies().get(0);
 
-                if(species.getDbId().equals(48887L)){
+                if(species.getDbId().equals(186860L)){ //  JP-PR
                     examinedPathways++;
                     if (LogUtil.isVerbose()) {
                         if (examinedPathways % 200 == 0) {
